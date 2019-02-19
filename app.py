@@ -7,10 +7,11 @@ Created on Tue Feb 19 13:52:39 2019
 from flask import Flask, jsonify,request
 from engine import *
 app= Flask(__name__)
-@app.route("/taskapi",methods=["GET"])
-def get_all_results():
+@app.route("/taskapi/<int:id>",methods=["GET"])
+def get_all_results(id):
     if get_cursor():
-        results=get_task_from_database_and_display("Run")
+#        print(id)
+        results=get_task_from_database_and_display(id)
     
     return jsonify({"results" : results})
 
@@ -19,4 +20,4 @@ def get_all_results():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8080)

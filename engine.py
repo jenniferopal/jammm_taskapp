@@ -17,10 +17,10 @@ def get_cursor():
     return cursor, conn
 
 
-def get_task_from_database_and_display(title):
+def get_task_from_database_and_display(id):
     cursor,connection=get_cursor()
    
-    cursor.execute("SELECT title, date, description,urgency,status FROM tasks WHERE title=?", (title,))
+    cursor.execute("SELECT title, date, description,urgency,status FROM tasks WHERE id=?", (id,))
     rows = cursor.fetchall()
 #    print(rows)  
     results=[]

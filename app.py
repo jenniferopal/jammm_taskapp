@@ -1,27 +1,50 @@
-from flask import Flask, render_template, request
-import sqlite3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb 18 11:52:42 2019
 
-app = Flask(__name__)
+@author: 612383287
+"""
 
-db_path = 'db/test.db'
-conn = sqlite3.connect('db/test.db')
-c = conn.cursor()
+from flask import Flask, jsonify, request
+app= Flask(__name__)
 
-#class Todo(db_path):
-#    id = db_path(db_path.Column(db_path, primary_key=True))
+languages = [ {'name' : 'JavaScript'}, {'name' : 'Python'}, {'name' : 'Ruby'}]
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/add', methods=["POST"])
-def add():
-    todo = Todo(text=request.form['todoitem'], complete=False)
-    return '<h1>{}</h1>'.format(request.form['todoItem'])
+@app.route('/', methods=['GET'])
+def test():
+    return jsonify({'message' : 'It works!'})
 
 
+@app.route('/lang', methods=['GET'])
+def returnAll():
+    return jsonify({'languages' : languages})
 
 
+@app.route('/lang/<string:name>', methods=['GET'])
+def returnOne(name):
+    langs = [language for language in languages if language['name'] ==name]
+    return jsonify({'language' : langs[0]})
 
-if __name__=='__main__':
-    app.run(debug=True)
+@app.route('/lang', methods=['POST'])
+def addOne():
+    language = {'name' : request.json['name']}
+    
+    languages.append(language)
+    return jsonify({'languages' : languages})
+
+@app.route('/lang/<string:name>', methods=['PUT'])
+def editOne(name):
+    langs = [language for language in languages if language['name'] ==name]
+    langs[0]['name'] = request.json['name']
+    return jsonify({'language' : langs[0]})
+
+@app.route('/lang/<string:name>', methods=['DELETE'])
+def removeOne(name):
+    lang = [language for language in languages if language['name'] ==name]
+    languages.remove(lang[0])
+    return jsonify({'languages' : languages})    
+
+
+if __name__ == '__main__':
+    app.run(debug=True, port=8080)
+    

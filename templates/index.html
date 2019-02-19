@@ -1,30 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title> JAMMM | Task Management App </title>
-    <link rel="stylesheet" href="static/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet"/>
-  </head>
-  <header>
-      <h1 class="app_title">JAMMM</h1>
-    </header>
-  <body>
-    <h3>TO DO LIST</h3>
-    <div>Add a new to do item:
-      <form action="/add" method="POST">
-        <input type='text' name='todoItem'>
-        <input type='submit'>
-      </form>
-    </div>
-    <div>
-        <ol>
-          <li><input type="checkbox">ENTRY</li>
-          <li><input type="checkbox">ENTRY</li>
-          <li><input type="checkbox">ENTRY</li>
-        </ol>
-    <div>
-
-  </body>
-</html>
+{% block content %}
+    <h1>Task Manager</h1>
+    <blockquote>{{quotes}}</blockquote>
+{% endblock %}

@@ -1,27 +1,25 @@
-from flask import Flask, render_template, request
-import sqlite3
+#CREATING THE WEB PAGE
+from flask import Flask, render_template, request, jsonify
+app = Flask("FormApp")
 
-app = Flask(__name__)
-
-db_path = 'db/test.db'
-conn = sqlite3.connect('db/test.db')
-c = conn.cursor()
-
-#class Todo(db_path):
-#    id = db_path(db_path.Column(db_path, primary_key=True))
-
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    quotes = ["milly huckle."]
+    return render_template("index.html", title="home", **locals())
 
-@app.route('/add', methods=["POST"])
-def add():
-    todo = Todo(text=request.form['todoitem'], complete=False)
-    return '<h1>{}</h1>'.format(request.form['todoItem'])
+@app.route("/form")
+def form():
+    return render_template("form.html", title="form")
+
+@app.route("/task_entry", methods=["POST"])
+def task_entry():
+    form_data = request.form
+    title = form_data["title"]
+    date = form_data["date"]
+    description = form_data["desc"]
+    result="ALL OK"
+    return render_template("task_entry.html", title="Form confirmation", **locals())
 
 
-
-
-
-if __name__=='__main__':
+if __name__ == "__main__":
     app.run(debug=True)

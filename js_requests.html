@@ -1,0 +1,25 @@
+<<!DOCTYPE html>
+<html>
+
+<script>
+// SYNC GET CALL
+
+  let url = "CUSTOM API ADDRESS"
+
+  get_api_data = function httpGet(url)
+
+  {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", url, false);
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+  }
+
+  let mock_json = {
+    "task_id": "1"
+  }
+
+
+</script>
+
+</html>

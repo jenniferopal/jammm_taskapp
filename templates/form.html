@@ -1,0 +1,23 @@
+{% block content %}
+<h1>Task Entry</h1>
+<div id="taskEntryForm">
+	<form method="post" action="task_entry">
+		
+		
+		<label for="title">Title:</label>
+		<input type="text" id="title" required="required" placeholder="Title">
+		<label for="date">Date:</label>
+		<input type="text" id="date" required="required" placeholder="dd/mm/yyyy">
+		<label for="description">Description:</label>
+		<input type="text" id="desc" required="required" placeholder="Description">
+		
+		<label for="important">Important:</label>
+		<input type="checkbox" id="important">
+		<label for="unimportant">Unimportant:</label>
+		<input type="checkbox" id="unimportant">
+		
+		<input type="submit" id="submit-button" name="submit" value="Submit">
+		
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+WHAT IS THE API GOING TO BE USED FOR?
+
+MILLY DATABASE/FRONT-END
+flask is going to createa a json response
+front-end is going to retreieve is the json
+
+url----> weather ----> {json file}
+local host-- json web page
+
+
+THINGS TO INCLUDE
+- sorting by the latest task first
+
+TWO PAGES- ONE THAT DISPLAYS THE INPUTS/ ONE THAT IS FOR THE USER TO ENTER THE 
+pop up on the page 
+
+jennifer- main page
+milly- inputting task
+
+when the user enters information in the task input
+how would the fields contact the database?
+
+endpoints- POST requests
+flask code will act on whatver weve posted
+pass the json block
+
+
+form
+submit button
+cancel button
+
+
+PUT REQUEST
+
+create the database
+

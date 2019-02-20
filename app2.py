@@ -20,6 +20,13 @@ def task_entry():
     result="ALL OK"
     return render_template("task_entry.html", title="Form confirmation", **locals())
 
+@app.route("/taskapi/<int:id>",methods=["GET"])
+def get_all_results(id):
+    if get_cursor():
+#        print(id)
+        results=get_task_from_database_and_display(id)
+    
+    return jsonify({"results" : results})
 
 if __name__ == "__main__":
     app.run(debug=True)

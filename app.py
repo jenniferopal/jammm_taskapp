@@ -26,6 +26,12 @@ def get_all_results_one():
 
     return jsonify({"results" : results})
 
+@app.route("/task",methods=["GET"])
+def get_all_results_one_id():
+    if get_cursor_one("database3"):
+        results=get_task_from_database_and_display(3)
+
+    return jsonify({"results" : results})
 
 
 

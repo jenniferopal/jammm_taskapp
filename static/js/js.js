@@ -10,12 +10,12 @@ fetch('/all')
     results_to_display = []
     for(var k in results) {
       var current = []
-      current.push('<li class="col-md-3 mt-4" id="' + results[k]['id'] + '">')
-      current.push('<p><strong>' + results[k]['title'] + '</strong></p>')
-        current.push('<p>' + results[k]['description'] + '</p>')
-        current.push('<p class="date">' + results[k]['date'] + '</p>')
-        current.push('<h6>' + results[k]['status'] + '</h6>')
-        current.push('<h6>' + results[k]['urgency'] + '</h6>')
+      current.push('<li class="col-md-3" id="' + results[k]['id'] + '">')
+      current.push('<h3>' + results[k]['title'] + '</h3>')
+        current.push('<p> <strong>Description: </strong>' + results[k]['description'] + '</p>')
+        current.push('<p>  <strong>Date: </strong>' + results[k]['date'] + '</p>')
+        current.push('<h6> <strong>Status: </strong>' + results[k]['status'] + '</h6>')
+        current.push('<h6> <strong>Urgency: </strong>' + results[k]['urgency'] + '</h6>')
         current.push('</li>')
       results_to_display.push(current.join(""))
 

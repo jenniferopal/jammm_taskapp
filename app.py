@@ -1,26 +1,48 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import sqlite3
+from engine import *
 
 app = Flask(__name__)
 
-db_path = 'db/test.db'
-conn = sqlite3.connect('db/test.db')
-c = conn.cursor()
-
-#class Todo(db_path):
-#    id = db_path(db_path.Column(db_path, primary_key=True))
-
+# Home page
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/add', methods=["POST"])
-def add():
-    todo = Todo(text=request.form['todoitem'], complete=False)
-    return '<h1>{}</h1>'.format(request.form['todoItem'])
+# Form page to add a new task
+@app.route('/add_task', methods=["GET"])
+def add_task():
+        return render_template('task.html')
+
+# API page for all tasks (IN USE ON HOME PAGE)
+@app.route("/all",methods=["GET"])
+def get_all_results_one():
+    if get_cursor():
+        results=get_information_for_tasks("database3")
+
+    return jsonify({"results" : results})
 
 
+# API page for one task (NOT IN USE)
+@app.route("/task",methods=["GET"])
+def get_all_results_one_id():
+    if get_cursor_one("database3"):
+        results=get_task_from_database_and_display(3)
 
+    return jsonify({"results" : results})
+
+# This page extends task page and displays the last task entry
+@app.route("/add_task_display",methods=["POST"])
+def task_entry_display():
+
+    form_data = request.form
+    title=form_data["title"]
+    description=form_data["description"]
+    date=form_data["date"]
+    urgency=form_data["urgency"]
+    status=form_data["status"]
+    new_to_database=new_entry(title,description, date,urgency,status)
+    return render_template("/add_task_display.html", **locals())
 
 
 if __name__=='__main__':

@@ -12,7 +12,7 @@ import json
 
 def get_cursor():
     conn=sqlite3.connect("database3.db")
-    cursor=conn.cursor()
+    cursor=conn.cursor() 
 #    print (cursor)
     return cursor, conn
 
@@ -31,6 +31,29 @@ def get_task_from_database_and_display(id):
         results.append(result)
         
     print(results)
+    return results
+
+def get_cursor_one(environment):
+    conn=sqlite3.connect("{}.db".format(environment))
+    cursor=conn.cursor()
+#    print (cursor)
+    return cursor, conn
+
+
+def get_information_for_tasks(environment):
+    cursor,connection=get_cursor_one(environment)
+   
+    cursor.execute("SELECT title, date, description,urgency,status FROM tasks")
+    rows = cursor.fetchall()
+#    print(rows)  
+    results=[]
+    result={}
+    for row in rows:
+        result={"title":row[0],"date":row[1],"description":row[2],"status":row[3]}
+#        print(result)
+        results.append(result)
+        
+#    print(results)
     return results
 
 get_task_from_database_and_display(4)

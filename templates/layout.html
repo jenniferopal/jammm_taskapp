@@ -2,12 +2,12 @@
 <html lang="en" dir="ltr">
  <head>
      <meta charset="utf-8">
-     <title>{{title}} | Flask Experiment</title>
+     <title>Task Manager</title>
      <link rel="stylesheet" href="{{ url_for('static', filename='css/screen.css') }}">
  </head>
  <body>
     <header>
-		<h1>{{title}}</h1>
+		<h1>Task Manager</h1>
         <nav>
           <ul class="menu">
             <li><a href="{{ url_for('index') }}">Home</a></li>
@@ -17,7 +17,5 @@
     </header>
     {% block content %}
     {% endblock %}
-    <p id="milly">Milly is the best</p>
  </body>
- <script src="js.js"></script>
 </html>

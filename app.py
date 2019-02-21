@@ -9,82 +9,49 @@ from flask import Flask, jsonify,request,render_template
 from engine import *
 app=Flask(__name__)
 
-dummy=[{"id":"1", "title":"lunch", "date": "15/03/2019","description":"to have something healthy for lunch", "status":"not done", "urgency":"not urgent"},
-         {"id":"2", "title":"breakfast","date": "15/04/2019", "description":"to have cake at breakfast", "status":"not done", "urgency":"not urgent"},
-         {"id":"3", "title":"dinner","date": "01/03/2019", "description":"to have wine for dinner", "status":"not done", "urgency":"urgent"}
-         ]
 
 
+# this is home page, we want to display all tasks on this page using the /all api
 @app.route("/")
 def index():
     return render_template("index.html")
 
+# this is /all api, it displays all the tasks from our database and is connected to aour home page through javascript code
 @app.route("/all",methods=["GET"])
 def get_all_results_one():
     if get_cursor_one("database3"):
         results=get_information_for_tasks("database3")
-
     return jsonify({"results" : results})
 
-@app.route("/task",methods=["GET"])
-def get_all_results_one_id():
+# this is /task api, it displays one tasks from our database (filtered by title) and is connected to our /task_entry_display page
+@app.route("/task",methods=["GET","POST"])
+def get_all_results_one_id(title):
     if get_cursor_one("database3"):
-        results=get_task_from_database_and_display(3)
+        results=get_task_from_database_and_display_by_title(title)
 
     return jsonify({"results" : results})
 
+#/new_task will have the form for a new entry task and a block content in jinja which will be extended by /task_entry_display
+@app.route("/new_task",methods=["GET"])
+def new_task():
+    return render_template("new_task.html")
 
-
-##this is using the dummy information
-#@app.route("/results",methods=["GET"])
-#def get_results():
-#    return jsonify({"results" : dummy})
-#
-##this is using the dummy information and only displays one task, filtered by the title(or whatever you'd want) added in the url
-#@app.route("/results/<string:title>",methods=["GET"])
-#def get_results_title(title):
-#    dummy_title=[dum for dum in dummy if dum["title"] == title]
-#    return jsonify({"dum" : dummy_title[0]})
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-##this is connecting to our database and retrieving information from it
-#@app.route("/mariana",methods=["GET"])
-#def get_all_results():
-#    if get_cursor("mariana"):
-#        results=get_information_for_businesses_with_input_business_type_mari("Computers")
-#
-#    return jsonify({"results" : results})
-#
-#
-#
-#
-#############################This is database3 ##############################################S
-#
-#
-##this is connecting to our database fro Final Project and retrieving information from it and filters it by a specific date
-#@app.route("/date",methods=["GET"])
-#def get_all_results_date():
-#    if get_cursor_one("database3"):
-#        results=filter_tasks_by_date("database3","17/02/2019")
-#
-#    return jsonify({"results" : results})
-#
-#@app.route("/all/<string:date>",methods=["GET"])
-#def get_all_results_filtered_by_date(date):
-#    if get_cursor_one("database3"):
-#        results=filter_tasks_by_date("database3",date)
-#
-#    return jsonify({"results" : results})
-
-
+#/task_entry_display  extends /new_task page ( so under the form we will have a jinja block
+# - if the method will be post(right afer submitting the form) then we write that info in the database and return an empty block ( an empty/task_entry_display page)
+# - if the method is get, then the block on /task_entry_display will use the api  /task and display that task
+@app.route("/task_entry_display",methods=["POST"])
+def task_entry_display():
+    if request.method=="POST":
+        form_data = request.form
+        title=form_data["title"]
+        description=form_data["description"]
+        date=form_data["date"]
+        urgency=form_data["urgency"]
+        state=form_data["state"]
+        new_entry(title,description, date,urgency,state)
+        return render_template("/task_entry_display", **locals())
+    else:
+        return render_template("/task_entry_display",**locals())
 
 if __name__ == "__main__":
     app.run(debug=True,port=5002)

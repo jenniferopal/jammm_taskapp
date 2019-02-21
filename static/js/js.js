@@ -48,3 +48,17 @@ fetch("/task")
   .catch(err => {
       console.error('An error ocurred', err);
   });
+
+
+
+
+  fetch("/task")
+    .then(response => response.json())
+    .then(dattta => {
+        console.log(datta);
+      var jokke=JSON.stringify(dattta);
+      document.getElementById("new_task").innerHTML = jokke;
+    })
+    .catch(err => {
+        console.error('An error ocurred', err);
+    });

@@ -3,48 +3,47 @@ fetch('/all')
   .then(data => {
     // var a=data
 
-      // console.log(data);
-      // console.log(data["results"])
-    var hello=JSON.stringify(data);
-    var mari=data["results"]
-    var muna=JSON.stringify(mari);
-    var milly=mari[0]
-    // console.log(milly);
-    var jen=JSON.stringify(milly);
-    // var beta=data.results;
-    // var muna= hello[198]
 
-    document.getElementById("milly").innerHTML = muna;
-    // document.getElementById("milly").innerHTML = hello;
+    var results=data["results"]
+    // console.log("1. results", results)
 
+    results_to_display = []
+    for(var k in results) {
+      var current = []
+      current.push('<li id="' + results[k]['id'] + '">')
+      current.push('<h2>' + results[k]['title'] + '</h2>')
+        current.push('<p>' + results[k]['description'] + '</p>')
+        current.push('<p class="date">' + results[k]['date'] + '</p>')
+        current.push('<h4>' + results[k]['status'] + '</h4>')
+        current.push('<h4>' + results[k]['urgency'] + '</h4>')
+        current.push('</li>')
+      results_to_display.push(current.join(""))
 
-  })
-  .catch(err => {
-      console.error('An error ocurred', err);
-  });
+      console.log("2. ", results[k])
+      // console.log("3. ", current)
 
-
-fetch("/task")
-  .then(response => response.json())
-  .then(datta => {
-    // var a=data
-
-      console.log(datta);
-      // console.log(data["results"])
-    var joke=JSON.stringify(datta);
-    // var mari=data["results"]
-    // var muna=JSON.stringify(mari);
-    // var milly=mari[0]
-    // console.log(milly);
-    // var jen=JSON.stringify(milly);
-    // var beta=data.results;
-    // var muna= hello[198]
-
-    document.getElementById("muna").innerHTML = joke;
-    // document.getElementById("milly").innerHTML = hello;
+    }
+    document.getElementById("results").innerHTML = results_to_display.join("");
 
 
   })
   .catch(err => {
       console.error('An error ocurred', err);
   });
+
+
+// fetch("/task")
+//   .then(response => response.json())
+//   .then(datta => {
+//     // var a=data
+//
+//       console.log(datta);
+//       // console.log(data["results"])
+//     var joke=JSON.stringify(datta);
+//
+//     document.getElementById("muna").innerHTML = joke;
+//
+//   })
+//   .catch(err => {
+//       console.error('An error ocurred', err);
+//   });

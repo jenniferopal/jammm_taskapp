@@ -9,10 +9,6 @@ from flask import Flask, jsonify,request,render_template
 from engine import *
 app=Flask(__name__)
 
-dummy=[{"id":"1", "title":"lunch", "date": "15/03/2019","description":"to have something healthy for lunch", "status":"not done", "urgency":"not urgent"},
-         {"id":"2", "title":"breakfast","date": "15/04/2019", "description":"to have cake at breakfast", "status":"not done", "urgency":"not urgent"},
-         {"id":"3", "title":"dinner","date": "01/03/2019", "description":"to have wine for dinner", "status":"not done", "urgency":"urgent"}
-         ]
 
 
 @app.route("/")

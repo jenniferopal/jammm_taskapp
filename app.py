@@ -24,7 +24,7 @@ def get_all_results_one():
     return jsonify({"results" : results})
 
 #this is /task/id get_task_from_database_and_display_by_title
-@app.route("/task_id",methods=["GET"])
+@app.route("/task_id",methods=["GET","POST"])
 def get_task():
     if get_cursor():
         results=get_task_from_database_and_display(3)
@@ -35,7 +35,7 @@ def get_task():
 
 
 # this is /task api, it displays one tasks from our database (filtered by title) and is connected to our /task_entry_display page
-@app.route("/task/<string:title>",methods=["GET","POST"])
+@app.route("/task_title",methods=["GET","POST"])
 def get_task_by_title(title):
     if get_cursor_one("database3"):
         results=get_task_from_database_and_display_by_title(title)

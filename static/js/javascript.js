@@ -28,7 +28,7 @@ fetch("/task_id")
       console.log("loren should be here")
       console.log(datta);
     var joke=JSON.stringify(datta);
-    document.getElementById("loren").innerHTML = joke;
+    document.getElementById("new_task").innerHTML = joke;
   })
   .catch(err => {
       console.error('An error ocurred', err);

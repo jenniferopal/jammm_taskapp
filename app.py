@@ -23,13 +23,26 @@ def get_all_results_one():
         results=get_information_for_tasks("database3")
     return jsonify({"results" : results})
 
+#this is /task/id get_task_from_database_and_display_by_title
+@app.route("/task_id",methods=["GET"])
+def get_task():
+    if get_cursor():
+        results=get_task_from_database_and_display(3)
+
+    return jsonify({"results" : results})
+
+
+
+
 # this is /task api, it displays one tasks from our database (filtered by title) and is connected to our /task_entry_display page
-@app.route("/task",methods=["GET","POST"])
-def get_all_results_one_id(title):
+@app.route("/task/<string:title>",methods=["GET","POST"])
+def get_task_by_title(title):
     if get_cursor_one("database3"):
         results=get_task_from_database_and_display_by_title(title)
 
     return jsonify({"results" : results})
+
+
 
 #/new_task will have the form for a new entry task and a block content in jinja which will be extended by /task_entry_display
 @app.route("/new_task",methods=["GET"])
@@ -41,17 +54,17 @@ def new_task():
 # - if the method is get, then the block on /task_entry_display will use the api  /task and display that task
 @app.route("/task_entry_display",methods=["POST"])
 def task_entry_display():
-    if request.method=="POST":
-        form_data = request.form
-        title=form_data["title"]
-        description=form_data["description"]
-        date=form_data["date"]
-        urgency=form_data["urgency"]
-        state=form_data["state"]
-        new_entry(title,description, date,urgency,state)
-        return render_template("/task_entry_display", **locals())
-    else:
-        return render_template("/task_entry_display",**locals())
+
+    form_data = request.form
+    title=form_data["title"]
+    description=form_data["description"]
+    date=form_data["date"]
+    urgency=form_data["urgency"]
+    status=form_data["status"]
+    new_to_database=new_entry(title,description, date,urgency,status)
+    return render_template("/task_entry_display.html", **locals())
+    # else:
+    #     return render_template("/task_entry_display",**locals())
 
 if __name__ == "__main__":
     app.run(debug=True,port=5002)

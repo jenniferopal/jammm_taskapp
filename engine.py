@@ -12,21 +12,7 @@ import json
 
 
 
-def get_information_for_businesses_with_input_business_type_mari(business_type):
-    cursor,connection=get_cursor("mariana")
 
-    cursor.execute("SELECT business_name, telephone_number, postcode,adress_line_1,adress_line_2,adress_line_3 FROM businesses WHERE business_category=?", (business_type,))
-    rows = cursor.fetchall()
-    print(rows)
-    results=[]
-    result={}
-    for row in rows:
-        result={"business_name":row[0],"phone":row[1],"postcode":row[2],"street":row[3],"city":row[4],"country":row[5]}
-        print(result)
-        results.append(result)
-
-    print(results)
-    return results
 
 def get_cursor_one(environment):
     conn=sqlite3.connect("{}.db".format(environment))
@@ -101,10 +87,11 @@ def get_task_from_database_and_display_by_title(title):
      print(results)
      return results
 
-def new_entry(title,description, date,urgency,state):
+def new_entry(title,description, date,urgency,status):
     cursor,connection=get_cursor()
-    cursor.execute("INSERT INTO tasks(title,description, date,urgency,state) VALUES(?,?,?,?,?)", (title,description, date,urgency,state))
+    cursor.execute("INSERT INTO tasks(title,description, date,urgency,status) VALUES(?,?,?,?,?)", (title,description, date,urgency,status))
     connection.commit()
+    return description
 
 
 #get_task_from_database_and_display(3)

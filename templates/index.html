@@ -1,62 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title> JAMMM | Task Management App </title>
-    <link rel="stylesheet" href="static/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  </head>
 
-  <!--TASK ENTRY BOX-->
+<!--LINKS -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title> JAMMM | Task Management App </title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+
+<!--JAMMM Title and Logo-->
 <body>
-  <img src="static\images\strawberry_jam_min.jpeg">
-  <div class="app_title">
-    <span class="first-word">JA</span>
-    <span class="last-words">MMM</span>
+  <header class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <img src="static\images\strawberry_jam_min.jpeg">
+      </div>
+      <div class="app_title col-sm-9">
+        <span class="first-word">JA</span>
+        <span class="last-words">MMM</span>
+      </div>
+    </div>
+  </header>
+
+<!--Add task button on homepaage with link to Task Entry Form -->
+  <div class="container col-sm-4">
+    <button class="btn btn-primary btn-lg btn-block">
+      <a href="/add_task">
+        Add task
+      </a>
+    </button>
   </div>
 
-  <div id="wrapper">
-  <header>
-    <input type="text" placeholder="STICK YOUR TASK HERE...">
-    <button>
-      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-      	 viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
-      <style type="text/css">
-      	.st0{fill:#AA4465;}
-      </style>
-      <g>
-      		<path class="fill" d="M16,8c0,0.5-0.5,1-1,1H9v6c0,0.5-0.5,1-1,1s-1-0.5-1-1V9H1C0.5,9,0,8.5,0,8s0.5-1,1-1h6V1c0-0.5,0.5-1,1-1
-      			s1,0.5,1,1v6h6C15.5,7,16,7.5,16,8z"/>
-      </g>
-      </svg>
-    </button>
-  </header>
-</div>
-  </body>
+<!--Tasks will be displayed in here-->
+<!--No CSS or JS for this yet-->
+  <div id="tasks">
+    <ol>
+<!--Tasks entered in the form to be displayed here for the user to go back into-->
+    </ol>
+  </div>
+  <script src="your js file"></script>
+</body>
 </html>
-
-
-
-<!--
-  <header>
-      <img src="static\images\strawberry_jam_min.jpeg">
-    </header>
-
-  <body>
-    <h3>TO DO LIST</h3>
-    <div>Add a new to do item:
-      <form action="/add" method="POST">
-        <input type='text' name='todoItem'>
-        <input type='submit'>
-      </form>
-    </div>
-    <div>
-        <ol>
-          <li><input type="checkbox">ENTRY</li>
-          <li><input type="checkbox">ENTRY</li>
-          <li><input type="checkbox">ENTRY</li>
-        </ol>
-    <div>
--->

@@ -14,6 +14,15 @@ c = conn.cursor()
 def index():
     return render_template('index.html')
 
+@app.route('/add_task', methods=["GET", "POST"])
+def add_task():
+    if request.method == "GET":
+        return render_template('task.html')
+    elif request.method == "POST":
+        # read form fields
+        # save to db
+        return render_template('index.html')
+
 @app.route('/add', methods=["POST"])
 def add():
     todo = Todo(text=request.form['todoitem'], complete=False)

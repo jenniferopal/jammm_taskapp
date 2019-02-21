@@ -2,12 +2,6 @@
 <html lang="en">
 
   <!--TASK ENTRY BOX-->
-<body>
-  <img src="static\images\strawberry_jam_min.jpeg">
-  <div class="app_title">
-    <span class="first-word">JA</span>
-    <span class="last-words">MMM</span>
-  </div>
 
 <head>
   <meta charset="utf-8">
@@ -21,13 +15,25 @@
 </head>
 
 <!--JAMMM Title-->
+<body>
+  <header class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <a href="/"><img src="static\images\strawberry_jam_min.jpeg"></a>
+      </div>
+      <div class="app_title col-sm-9">
+        <span class="first-word">JA</span>
+        <span class="last-words">MMM</span>
+      </div>
+    </div>
+  </header>
 
   <div class="text-center">
     <a href="/add_task" <button type="button" class="btn btn-primary">ADD A TASK</button><a />
   </div>
 
-  <div>
-    <ol id="results"></ol>
+  <div class="container">
+    <ol class="row" id="results"></ol>
   </div>
 
 

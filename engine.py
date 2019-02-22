@@ -65,3 +65,8 @@ def new_entry(title,description, date,urgency,status):
     cursor.execute("INSERT INTO tasks(title,description, date,urgency,status) VALUES(?,?,?,?,?)", (title,description, date,urgency,status))
     connection.commit()
     return description
+
+def delete_entry(title):
+    cursor,connection=get_cursor()
+    cursor.execute("DELETE FROM tasks WHERE title=?", (title,))
+    connection.commit()

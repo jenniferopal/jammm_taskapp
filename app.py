@@ -44,6 +44,14 @@ def task_entry_display():
     new_to_database=new_entry(title,description, date,urgency,status)
     return render_template("/add_task_display.html", **locals())
 
+# this is deleting a task
+@app.route("/task_delete/<string:title>",methods=["GET"])
+def task_delete(title):
+
+
+    delete_database=delete_entry(title)
+    return render_template("/index.html", **locals())
+
 
 if __name__=='__main__':
     app.run(debug=True)

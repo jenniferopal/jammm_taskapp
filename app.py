@@ -53,8 +53,9 @@ def new_task():
 # - if the method will be post(right afer submitting the form) then we write that info in the database and return an empty block ( an empty/task_entry_display page)
 # - if the method is get, then the block on /task_entry_display will use the api  /task and display that task
 @app.route("/task_entry_display",methods=["POST"])
-def task_entry_display():
 
+def task_entry_display():
+    print(request)
     form_data = request.form
     title=form_data["title"]
     description=form_data["description"]

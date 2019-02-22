@@ -93,5 +93,10 @@ def new_entry(title,description, date,urgency,status):
     connection.commit()
     return description
 
-
+def delete_entry(title):
+    cursor,connection=get_cursor()
+    cursor.execute("DELETE FROM tasks WHERE title=?", (title,))
+    connection.commit()
+    return "OK"
+delete_entry("Run")
 #get_task_from_database_and_display(3)

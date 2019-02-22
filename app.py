@@ -46,6 +46,7 @@ def get_task_by_title(title):
 
 #/new_task will have the form for a new entry task and a block content in jinja which will be extended by /task_entry_display
 @app.route("/new_task",methods=["GET"])
+
 def new_task():
     return render_template("new_task.html")
 
@@ -55,7 +56,7 @@ def new_task():
 @app.route("/task_entry_display",methods=["POST"])
 
 def task_entry_display():
-    print(request)
+
     form_data = request.form
     title=form_data["title"]
     description=form_data["description"]
@@ -64,8 +65,17 @@ def task_entry_display():
     status=form_data["status"]
     new_to_database=new_entry(title,description, date,urgency,status)
     return render_template("/task_entry_display.html", **locals())
-    # else:
-    #     return render_template("/task_entry_display",**locals())
+
+
+# this is deleting a task
+@app.route("/task_delete",methods=["POST"])
+def task_delete():
+
+    form_data = request.form
+    title=form_data["title"]
+    delete_database=delete_entry(title)
+    return render_template("/index.html", **locals())
+
 
 if __name__ == "__main__":
     app.run(debug=True,port=5002)
